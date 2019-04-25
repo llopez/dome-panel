@@ -1,12 +1,16 @@
 import React from 'react';
-import Item from './components/Item'
+import List from './components/List';
+
+const items = [
+  {id: 1, name: 'Item 1', state: 'off'},
+  {id: 2, name: 'Item 2', state: 'off'},
+  {id: 3, name: 'Item 3', state: 'off'},
+];
 
 function App() {
   return (
     <div className="App">
-      <Item name="Light 1" />
-      <Item name="Light 2" />
-      <Item name="Light 3" />
+      <List items={items} />
     </div>
   );
 }

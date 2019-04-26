@@ -1,5 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Item from './Item';
+
+const mapStateToProps = (state /*, ownProps*/) => {
+  return {
+    items: state
+  }
+}
 
 const List = (props) => (
   <ul>
@@ -9,4 +16,7 @@ const List = (props) => (
   </ul>
 );
 
-export default List;
+export default connect(
+  mapStateToProps,
+  {}
+)(List)

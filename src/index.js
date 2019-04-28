@@ -11,11 +11,11 @@ const itemReducer = (state = [], {type, payload}) => {
   switch (type) {
     case 'INITIALIZE':
       return payload.data;
-    case 'ADD_ITEM':
+    case 'ITEM_ADDED':
       return [...state, payload];
-    case 'REMOVE_ITEM':
+    case 'ITEM_REMOVED':
       return state.filter(x => x.id !== payload.id);
-    case 'UPDATE_ITEM':
+    case 'ITEM_UPDATED':
       return state.map(x => x.id === payload.id ? {...x, ...payload} : x)
     default:
      return state;

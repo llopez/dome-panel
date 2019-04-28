@@ -3,18 +3,18 @@ let socket = new Socket("ws://localhost:4000/socket", {params: {token: window.us
 socket.connect()
 let channel = socket.channel("room:lobby", {})
 
-const addItem = (payload) => ({
-  type: 'ADD_ITEM',
+const itemAdded = (payload) => ({
+  type: 'ITEM_ADDED',
   payload: payload
 })
 
-const removeItem = (payload) => ({
-  type: 'REMOVE_ITEM',
+const itemRemoved = (payload) => ({
+  type: 'ITEM_REMOVED',
   payload: payload
 })
 
-const updateItem = (payload) => ({
-  type: 'UPDATE_ITEM',
+const itemUpdated = (payload) => ({
+  type: 'ITEM_UPDATED',
   payload: payload
 })
 
@@ -29,15 +29,15 @@ const subscribeToItems = (store) => {
   })
 
   channel.on("ITEM_ADDED", payload => {
-    store.dispatch(addItem(payload))
+    store.dispatch(itemAdded(payload))
   })
 
   channel.on("ITEM_REMOVED", payload => {
-    store.dispatch(removeItem(payload))
+    store.dispatch(itemRemoved(payload))
   })
 
   channel.on("ITEM_UPDATED", payload => {
-    store.dispatch(updateItem(payload))
+    store.dispatch(itemUpdated(payload))
   })
 }
 

@@ -47,4 +47,10 @@ const removeAsync = (id) => {
   }
 }
 
-export { removeAsync, subscribeToItems };
+const updateItem = (item) => {
+  return dispatch => {
+    channel.push("update:item", item)
+  }
+}
+
+export { removeAsync, subscribeToItems, updateItem };

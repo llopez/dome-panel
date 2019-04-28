@@ -1,8 +1,13 @@
 import React from 'react';
 
-const Item = ({id, name, state, onRemove}) => (
+const Item = ({id, name, state, onRemove, onUpdate}) => (
   <li>
-    {name} | {state} | <button onClick={() => { onRemove(id) }} >X</button>
+    {name} | <button onClick={() => {
+      const params = {id, name, state: state === 'on' ? 'off' : 'on'};
+      onUpdate(params)
+    }} >{state}</button> | <button onClick={() => {
+      onRemove(id) }
+    } >X</button>
   </li>
 );
 

@@ -2,18 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import { subscribeToItems } from './actions/items';
 
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-
-const initialState = [
-  {id: 1, name: 'Item 1', state: 'off'},
-  {id: 2, name: 'Item 2', state: 'off'},
-  {id: 3, name: 'Item 3', state: 'off'},
-]
-
-const itemReducer = (state = initialState, {type, payload}) => {
+const itemReducer = (state = [], {type, payload}) => {
   switch (type) {
+    case 'INITIALIZE':
+      return payload.data;
     case 'ADD_ITEM':
       return [...state, payload];
     case 'REMOVE_ITEM':
@@ -24,8 +21,12 @@ const itemReducer = (state = initialState, {type, payload}) => {
      return state;
   }
 }
+// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = createStore(
+  itemReducer, applyMiddleware(thunk),
+);
 
-const store = createStore(itemReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+subscribeToItems(store);
 
 ReactDOM.render(
   <Provider store={store}>

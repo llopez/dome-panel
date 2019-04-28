@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Item from '../components/Item';
-import { removeItem } from '../actions/items';
+import { removeAsync } from '../actions/items';
 
 const mapStateToProps = (state, props) => {
   return {
@@ -8,7 +8,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps =  {
-  onRemove: removeItem,
+  onRemove: removeAsync,
 }
 
 export default connect(

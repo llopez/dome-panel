@@ -1,11 +1,15 @@
-import React from 'react';
-import ListContainer from '../containers/ListContainer';
+import React, { Fragment } from 'react';
+import { Header } from './layouts';
+import ContentContainer from '../containers/ContentContainer';
+import FooterContainer from '../containers/FooterContainer';
 
-function App() {
+const App = (props) => {
   return (
-    <div className="App">
-      <ListContainer />
-    </div>
+    <Fragment>
+      <Header />
+      <ContentContainer />
+      <FooterContainer />
+    </Fragment>
   );
 }
 

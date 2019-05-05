@@ -1,6 +1,6 @@
 import { Socket } from 'phoenix-socket';
 let socket = new Socket("ws://192.168.0.2:4000/socket", {params: {token: window.userToken}})
-socket.connect()
+//socket.connect()
 let channel = socket.channel("room:lobby", {})
 
 const itemAdded = (payload) => ({

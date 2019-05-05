@@ -3,7 +3,7 @@ import List from '../components/List';
 
 const mapStateToProps = (state /*, ownProps*/) => {
   return {
-    items: state
+    items: state.items
   }
 }
 

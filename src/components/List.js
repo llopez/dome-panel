@@ -1,16 +1,15 @@
 import React from 'react';
 import ItemContainer from '../containers/ItemContainer';
-import SensorContainer from '../containers/SensorContainer';
+import { List } from '@material-ui/core';
 
-const List = ({items}) => (
-  <ul>
+const maxHeight = () => (
+  (window.innerHeight - 130) + 'px'
+)
+
+export default ({items}) => (
+  <List style={{overflow: 'auto', maxHeight: maxHeight()}}>
     {
-      items.filter( x => x.type === 'sensor').map(x => <SensorContainer key={x.id} {...x} />)
+      items.map(x => <ItemContainer key={x.id} {...x} />)
     }
-    {
-      items.filter( x => x.type === 'switch').map(x => <ItemContainer key={x.id} {...x} />)
-    }
-  </ul>
+  </List>
 );
-
-export default List;

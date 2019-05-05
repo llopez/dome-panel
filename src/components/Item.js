@@ -1,14 +1,29 @@
 import React from 'react';
+import SwitchItem from './items/switch';
+import TempItem from './items/temp';
+import AirItem from './items/air';
+import HumItem from './items/hum';
+import DimmerItem from './items/dimmer';
 
-const Item = ({id, name, state, onRemove, onUpdate}) => (
-  <li>
-    {name} | <button onClick={() => {
-      const params = {id, name, state: state === 'ON' ? 'OFF' : 'ON'};
-      onUpdate(params)
-    }} >{state}</button> | <button onClick={() => {
-      onRemove(id) }
-    } >X</button>
-  </li>
-);
+export default (props) => {
+  let item;
 
-export default Item;
+  switch (props.type) {
+    case 'temp':
+      item = <TempItem {...props} />
+      break;
+    case 'air':
+      item = <AirItem {...props} />
+      break;
+    case 'hum':
+      item = <HumItem {...props} />
+      break;
+    case 'dimm':
+      item = <DimmerItem {...props} />
+      break;
+    default:
+      item = <SwitchItem {...props} />
+  }
+
+  return item;
+}

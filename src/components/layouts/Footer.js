@@ -16,9 +16,11 @@ const styles = {
 
 const Footer = (props) => {
   const [state, dispatch] = useContext(Context);
+  const { classes } = props;
 
   return (
     <Tabs
+      className={classes.root}
       value={state.page}
       indicatorColor="primary"
       textColor="primary"

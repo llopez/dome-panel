@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-export default (props) => (
+const SettingsPage = (props) => (
   <form noValidate autoComplete="off">
     <TextField
       id="url"
@@ -29,3 +29,5 @@ export default (props) => (
     />
   </form>
 )
+
+export default SettingsPage;

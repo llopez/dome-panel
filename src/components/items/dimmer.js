@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Context from '../../context/context';
 import { ListItem,
   ListItemIcon,
   ListItemText,
@@ -10,6 +11,8 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import IconButton from '@material-ui/core/IconButton';
 
 export default ({id, name, state}) => {
+  const [_, dispatch] = useContext(Context);
+
   return (
     <ListItem divider>
       <ListItemIcon>
@@ -17,8 +20,20 @@ export default ({id, name, state}) => {
       </ListItemIcon>
       <ListItemText primary={name} secondary={state} />
       <ListItemSecondaryAction style={{width: 53}}>
-        <IconButton><AddIcon fontSize="small"/></IconButton>
-        <IconButton><RemoveIcon fontSize="small"/></IconButton>
+        <IconButton
+          disabled={ state >= 100 }
+          onClick={() => dispatch({
+            type: 'ITEM_UPDATED',
+            payload: {id: id, state: state + 5}
+          })}>
+          <AddIcon fontSize="small"/>
+        </IconButton>
+        <IconButton
+          disabled={ state === 0 }
+          onClick={() => { dispatch({
+            type: 'ITEM_UPDATED',
+            payload: {id: id, state: state - 5}})
+          }}><RemoveIcon fontSize="small"/></IconButton>
       </ListItemSecondaryAction>
     </ListItem>
   )

@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Context from '../../context/context';
 import { Grid } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import SettingsPage from '../Settings';
-import ListContainer from '../../containers/ListContainer';
+import List from '../../components/List';
 
-export default (props) => {
+const Content = (props) => {
+  const [state, dispatch] = useContext(Context);
+
   return (
     <Grid container style={{marginTop: 64}}>
       <Grid item xs={12}>
-        <SwipeableViews index={props.index} onChangeIndex={props.onSwipe}>
-          <ListContainer />
+        <SwipeableViews
+          index={state.page}
+          onChangeIndex={(index) => { dispatch({type: 'PAGE_CHANGED', payload: index }) }}>
+          <List />
           <SettingsPage />
         </SwipeableViews>
       </Grid>
     </Grid>
   )
 }
+
+export default Content;

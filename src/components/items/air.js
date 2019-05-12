@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Context from '../../context/context';
 import { ListItem,
   ListItemIcon,
   ListItemText,
@@ -8,9 +9,11 @@ import { ListItem,
 import AirConIcon from '../icons/AirConIcon';
 
 export default ({id, name, state, type, onUpdate}) => {
+  const [_, dispatch] = useContext(Context);
+
   const changeState = () => {
     const params = {id, name, state: state === 'ON' ? 'OFF' : 'ON'};
-    onUpdate(params)
+    dispatch({type: 'ITEM_UPDATED', payload: params})
   }
 
   return (

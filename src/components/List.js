@@ -1,15 +1,22 @@
-import React from 'react';
-import ItemContainer from '../containers/ItemContainer';
-import { List } from '@material-ui/core';
+import React, { useContext } from 'react';
+import Context from '../context/context';
+import Item from '../components/Item';
+import { List as MUIList } from '@material-ui/core';
 
 const maxHeight = () => (
   (window.innerHeight - 130) + 'px'
 )
 
-export default ({items}) => (
-  <List style={{overflow: 'auto', maxHeight: maxHeight()}}>
-    {
-      items.map(x => <ItemContainer key={x.id} {...x} />)
-    }
-  </List>
-);
+const List = () => {
+  const [state, dispatch] = useContext(Context);
+
+  return (
+    <MUIList style={{overflow: 'auto', maxHeight: maxHeight()}}>
+      {
+        state.items.map(x => <Item key={x.id} {...x} />)
+      }
+    </MUIList>
+  )
+}
+
+export default List;

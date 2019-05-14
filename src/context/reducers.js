@@ -24,6 +24,15 @@ export const pageReducer = (state, {type, payload}) => {
   }
 }
 
+export const settingsReducer = (state, {type, payload}) => {
+  switch (type) {
+    case 'SERVER_URL_CHANGED':
+      return {...state, serverUrl: payload };
+    default:
+     return state;
+  }
+}
+
 export const combineReducers = reducer => {
   return (state = {}, action) => {
     const keys = Object.keys(reducer);
@@ -38,5 +47,6 @@ export const combineReducers = reducer => {
 
 export const rootReducer = combineReducers({
   items: itemsReducer,
-  page: pageReducer
+  page: pageReducer,
+  settings: settingsReducer,
 })

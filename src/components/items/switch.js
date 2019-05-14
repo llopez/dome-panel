@@ -9,11 +9,11 @@ import { ListItem,
 import LightBulbIcon from '../icons/LightBulbIcon';
 
 export default ({id, name, state}) => {
-  const [_, dispatch] = useContext(Context);
+  const [_, dispatch, channel] = useContext(Context);
 
   const changeState = () => {
     const params = {id, name, state: state === 'ON' ? 'OFF' : 'ON'};
-    dispatch({type: 'ITEM_UPDATED', payload: params})
+    channel.push('update:item', params)
   }
 
   return (
@@ -23,7 +23,7 @@ export default ({id, name, state}) => {
       </ListItemIcon>
       <ListItemText primary={name} secondary={state} />
       <ListItemSecondaryAction>
-        <Switch onChange={changeState}/>
+        <Switch onChange={changeState} checked={state === 'ON' ? true : false}/>
       </ListItemSecondaryAction>
     </ListItem>
   )

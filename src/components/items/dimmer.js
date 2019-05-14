@@ -11,7 +11,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import IconButton from '@material-ui/core/IconButton';
 
 export default ({id, name, state}) => {
-  const [_, dispatch] = useContext(Context);
+  const [_, dispatch, channel] = useContext(Context);
 
   return (
     <ListItem divider>
@@ -22,18 +22,13 @@ export default ({id, name, state}) => {
       <ListItemSecondaryAction style={{width: 53}}>
         <IconButton
           disabled={ state >= 100 }
-          onClick={() => dispatch({
-            type: 'ITEM_UPDATED',
-            payload: {id: id, state: state + 5}
-          })}>
+          onClick={() => channel.push('update:item', {id: id, state: (parseInt(state) + 5).toString()})}>
           <AddIcon fontSize="small"/>
         </IconButton>
         <IconButton
-          disabled={ state === 0 }
-          onClick={() => { dispatch({
-            type: 'ITEM_UPDATED',
-            payload: {id: id, state: state - 5}})
-          }}><RemoveIcon fontSize="small"/></IconButton>
+          disabled={ state <= 0 }
+          onClick={() => channel.push('update:item', {id: id, state: (parseInt(state) - 5).toString()})}>
+          <RemoveIcon fontSize="small"/></IconButton>
       </ListItemSecondaryAction>
     </ListItem>
   )
